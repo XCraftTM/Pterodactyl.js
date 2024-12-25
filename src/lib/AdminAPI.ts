@@ -47,24 +47,24 @@ class AdminClient extends PterodactylAPI {
         });
     }
 
-    public getUsers(page?: number): Promise<User[]> {
-        return User.getAll(this, page);
+    public getUsers(amount?: number): Promise<User[]> {
+        return User.getAll(this, amount);
     }
 
-    public getNodes(page?: number): Promise<Node[]> {
-        return Node.getAll(this, page);
+    public getNodes(amount?: number): Promise<Node[]> {
+        return Node.getAll(this, amount);
     }
 
-    public getLocations(page?: number): Promise<Location[]> {
-        return Location.getAll(this, page);
+    public getLocations(amount?: number): Promise<Location[]> {
+        return Location.getAll(this, amount);
     }
 
-    public getServers(page?: number): Promise<Server[]> {
-        return Server.getAll(this, page);
+    public getServers(amount?: number): Promise<Server[]> {
+        return Server.getAll(this, amount);
     }
 
-    public getNests(page?: number): Promise<Nest[]> {
-        return Nest.getAll(this, page);
+    public getNests(amount?: number): Promise<Nest[]> {
+        return Nest.getAll(this, amount);
     }
 
     public getUser(userId: number): Promise<User> {
