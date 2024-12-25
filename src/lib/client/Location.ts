@@ -24,10 +24,10 @@ class Location extends LocationModel {
         });
     }
 
-    public static getAll(api: AdminAPI, page: number = 1): Promise<Location[]> {
+    public static getAll(api: AdminAPI, amount: number = 100000): Promise<Location[]> {
         return new Promise(async (resolve, reject) => {
             try {
-                let res = await api.call(`/application/locations?page=${page}`);
+                let res = await api.call(`/application/locations?per_page=${amount}`);
                 resolve(res.data.map((value: any) => new Location(api, value.attributes, res.pagination)));
             } catch (error) {
                 reject(error);
@@ -86,17 +86,13 @@ class Location extends LocationModel {
     }
 
     public delete(): Promise<void> {
-        return new Promise((resolve, reject) => {
-            return new Promise((resolve, reject) => {
-                return new Promise(async (resolve, reject) => {
-                    try {
-                        await this.api.call(`/application/locations/${this.id}`, 'DELETE');
-                        resolve();
-                    } catch (error) {
-                        reject(error);
-                    }
-                });
-            });
+        return new Promise(async (resolve, reject) => {
+            try {
+                await this.api.call(`/application/locations/${this.id}`, 'DELETE');
+                resolve();
+            } catch (error) {
+                reject(error);
+            }
         });
     }
 }

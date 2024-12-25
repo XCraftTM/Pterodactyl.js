@@ -24,10 +24,10 @@ class User extends UserModel {
         });
     }
 
-    public static getAll(api: AdminAPI, page: number = 1): Promise<User[]> {
+    public static getAll(api: AdminAPI, amount: number = 100000): Promise<User[]> {
         return new Promise(async (resolve, reject) => {
             try {
-                let res = await api.call(`/application/users?page=${page}`);
+                let res = await api.call(`/application/users?per_page=${amount}`);
                 resolve(res.data.map((value: any) => new User(api, value.attributes, res.pagination)));
             } catch (error) {
                 reject(error);

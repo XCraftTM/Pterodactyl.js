@@ -18,10 +18,10 @@ class ClientServer extends ClientServerModel {
         if (paginationOptions) this.pagination = new Pagination(paginationOptions);
     }
 
-    public static getAll(api: UserAPI, page: number = 1): Promise<ClientServer[]> {
+    public static getAll(api: UserAPI, amount: number = 100000): Promise<ClientServer[]> {
         return new Promise(async (resolve, reject) => {
             try {
-                let res = await api.call(`/client?page=${page}`);
+                let res = await api.call(`/client?per_page=${amount}`);
                 resolve(res.data.map((value: any) => new ClientServer(api, value.attributes, res.pagination)));
             } catch (error) {
                 reject(error);

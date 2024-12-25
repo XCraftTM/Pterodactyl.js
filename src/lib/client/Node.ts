@@ -25,10 +25,10 @@ class Node extends NodeModel {
         });
     }
 
-    public static getAll(api: AdminAPI, page: number = 1): Promise<Node[]> {
+    public static getAll(api: AdminAPI, amount: number = 100000): Promise<Node[]> {
         return new Promise(async (resolve, reject) => {
             try {
-                let res = await api.call(`/application/nodes?page=${page}`);
+                let res = await api.call(`/application/nodes?per_page=${amount}`);
                 resolve(res.data.map((value: any) => new Node(api, value.attributes, res.pagination)));
             } catch (error) {
                 reject(error);

@@ -44,15 +44,13 @@ class ServerDatabase extends ServerDatabaseModel {
     }
 
     public delete(): Promise<void> {
-        return new Promise((resolve, reject) => {
-            return new Promise(async (resolve, reject) => {
-                try {
-                    await this.api.call(`/application/servers/${this.server}/databases/${this.id}`, 'DELETE');
-                    resolve();
-                } catch (error) {
-                    reject(error);
-                }
-            });
+        return new Promise(async (resolve, reject) => {
+            try {
+                await this.api.call(`/application/servers/${this.server}/databases/${this.id}`, 'DELETE');
+                resolve();
+            } catch (error) {
+                reject(error);
+            }
         });
     }
 }

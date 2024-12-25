@@ -15,10 +15,10 @@ class Nest extends NestModel {
         if (paginationOptions) this.pagination = new Pagination(paginationOptions);
     }
 
-    public static getAll(api: AdminAPI, page: number = 1): Promise<Nest[]> {
+    public static getAll(api: AdminAPI, amount: number = 100000): Promise<Nest[]> {
         return new Promise(async (resolve, reject) => {
             try {
-                let res = await api.call(`/application/nests?page=${page}`);
+                let res = await api.call(`/application/nests?per_page=${amount}`);
                 resolve(res.data.map((value: any) => new Nest(api, value.attributes, res.pagination)));
             } catch (error) {
                 reject(error);

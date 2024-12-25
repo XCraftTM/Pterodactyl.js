@@ -25,10 +25,10 @@ class Server extends ServerModel {
         });
     }
 
-    public static getAll(api: AdminAPI, page: number = 1): Promise<Server[]> {
+    public static getAll(api: AdminAPI, amount: number = 100000): Promise<Server[]> {
         return new Promise(async (resolve, reject) => {
             try {
-                let res = await api.call(`/application/servers?page=${page}`);
+                let res = await api.call(`/application/servers?per_page=${amount}`);
                 resolve(res.data.map((value: any) => new Server(api, value.attributes, res.pagination)));
             } catch (error) {
                 reject(error);

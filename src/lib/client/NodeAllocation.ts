@@ -13,10 +13,10 @@ class NodeAllocation extends NodeAllocationModel {
         if (paginationOptions) this.pagination = new Pagination(paginationOptions);
     }
 
-    public static getAll(api: AdminAPI, node: number, page: number = 1): Promise<NodeAllocation[]> {
+    public static getAll(api: AdminAPI, node: number, amount: number = 100000): Promise<NodeAllocation[]> {
         return new Promise(async (resolve, reject) => {
             try {
-                let res = await api.call(`/application/nodes/${node}/allocations?page=${page}`);
+                let res = await api.call(`/application/nodes/${node}/allocations?per_page=${amount}`);
                 resolve(res.data.map((value: any) => new NodeAllocation(api, node, value.attributes, res.pagination)));
             } catch (error) {
                 reject(error);
